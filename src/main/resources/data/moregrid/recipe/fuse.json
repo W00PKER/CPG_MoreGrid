@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    " C ",
+    "GCG",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "create:copper_nugget"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "id": "moregrid:fuse",
+    "count": 4
+  }
+}

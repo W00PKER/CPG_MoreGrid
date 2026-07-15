@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [" Z ", "PCP", " Z "],
+  "key": {
+    "Z": {"item": "powergrid:zinc_sheet"},
+    "P": {"item": "minecraft:paper"},
+    "C": {"item": "minecraft:charcoal"}
+  },
+  "result": {"id": "moregrid:dry_cell", "count": 1}
+}

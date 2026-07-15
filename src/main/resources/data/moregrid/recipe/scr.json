@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [" D ", "RBR", " C "],
+  "key": {
+    "D": {"item": "powergrid:diode"},
+    "B": {"item": "powergrid:bjt_npn"},
+    "R": {"item": "minecraft:redstone"},
+    "C": {"item": "minecraft:copper_ingot"}
+  },
+  "result": {"id": "moregrid:scr", "count": 1}
+}
