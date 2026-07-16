@@ -1,0 +1,46 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"all": "moregrid:block/component/dry_cell"
+	},
+	"elements": [
+		{
+			"from": [0.72, 0.2, 0.62],
+			"to": [4.28, 1.28, 2.38],
+			"faces": {
+				"north": {"uv": [6, 11, 10, 13], "texture": "#all"},
+				"east": {"uv": [6, 11, 10, 13], "texture": "#all"},
+				"south": {"uv": [6, 11, 10, 13], "texture": "#all"},
+				"west": {"uv": [6, 11, 10, 13], "texture": "#all"},
+				"up": {"uv": [3, 6, 13, 10], "texture": "#all"},
+				"down": {"uv": [6, 11, 10, 13], "texture": "#all"}
+			}
+		},
+		{
+			"from": [0.14, 0.18, 1.14],
+			"to": [0.72, 0.52, 1.86],
+			"faces": {
+				"north": {"uv": [7, 2, 9, 3], "texture": "#all"},
+				"east": {"uv": [7, 2, 9, 3], "texture": "#all"},
+				"south": {"uv": [7, 2, 9, 3], "texture": "#all"},
+				"west": {"uv": [7, 2, 9, 3], "texture": "#all"},
+				"up": {"uv": [7, 2, 9, 3], "texture": "#all"},
+				"down": {"uv": [7, 2, 9, 3], "texture": "#all"}
+			}
+		},
+		{
+			"from": [4.28, 0.18, 1.14],
+			"to": [4.86, 0.52, 1.86],
+			"faces": {
+				"north": {"uv": [7, 2, 9, 3], "texture": "#all"},
+				"east": {"uv": [7, 2, 9, 3], "texture": "#all"},
+				"south": {"uv": [7, 2, 9, 3], "texture": "#all"},
+				"west": {"uv": [7, 2, 9, 3], "texture": "#all"},
+				"up": {"uv": [7, 2, 9, 3], "texture": "#all"},
+				"down": {"uv": [7, 2, 9, 3], "texture": "#all"}
+			}
+		}
+	]
+}

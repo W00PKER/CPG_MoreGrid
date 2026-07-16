@@ -21,6 +21,7 @@ import org.patryk3211.powergrid.circuits.circuitboard.ComponentCircuitBuilder;
 import org.patryk3211.powergrid.circuits.components.IComponentGoggleInformation;
 import org.patryk3211.powergrid.circuits.components.IInteractableComponent;
 import org.patryk3211.powergrid.circuits.components.IRenderedComponent;
+import org.patryk3211.powergrid.circuits.components.VerticallyOrientableComponent;
 import org.patryk3211.powergrid.circuits.components.properties.BooleanProperty;
 import org.patryk3211.powergrid.circuits.components.properties.CalculatedProperty;
 import org.patryk3211.powergrid.circuits.components.properties.ComponentProperty;
@@ -34,9 +35,21 @@ import java.util.List;
 import java.util.Locale;
 
 /** A replaceable cartridge fuse with an I²t-style trip curve. */
-public final class FuseComponent extends org.patryk3211.powergrid.circuits.components.Component
+public final class FuseComponent extends VerticallyOrientableComponent
         implements IComponentGoggleInformation, IInteractableComponent, IRenderedComponent {
     private static final double TICK_SECONDS = 1.0D / 20.0D;
+
+    private static final ComponentFootprint VERTICAL_FOOTPRINT =
+            new ComponentFootprint.Builder(
+                    3, 5,
+                    "component." + MoreGrid.MOD_ID + ".fuse",
+                    null
+            )
+                    .addPad(1, 0, 0)
+                    .addPad(1, 4, 1)
+                    .withItem()
+                    .withOutline()
+                    .build();
 
     public static final FloatProperty RATED_CURRENT = new FloatProperty(
             MoreGrid.MOD_ID,
@@ -76,7 +89,7 @@ public final class FuseComponent extends org.patryk3211.powergrid.circuits.compo
     ).hidden().cast();
 
     public FuseComponent(ComponentFootprint footprint) {
-        super(footprint);
+        super(footprint, VERTICAL_FOOTPRINT);
     }
 
     @Override
@@ -178,13 +191,12 @@ public final class FuseComponent extends org.patryk3211.powergrid.circuits.compo
             return;
         }
 
-        // This component has one fixed 5 x 3 footprint. No vertical model or
-        // alternate footprint is selected after the orientation feature is removed.
+        ComponentFootprint currentFootprint = footprint(placed);
         FuseBlownRenderer.render(
                 be,
                 placed,
-                5.0F / 32.0F,
-                3.0F / 32.0F,
+                currentFootprint.getWidth() / 32.0F,
+                currentFootprint.getHeight() / 32.0F,
                 poseStack,
                 bufferSource,
                 overlay

@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 import org.patryk3211.powergrid.circuits.circuitboard.ComponentCircuitBuilder;
 import org.patryk3211.powergrid.circuits.components.IComponentGoggleInformation;
+import org.patryk3211.powergrid.circuits.components.VerticallyOrientableComponent;
 import org.patryk3211.powergrid.circuits.components.properties.CalculatedProperty;
 import org.patryk3211.powergrid.circuits.components.properties.ComponentProperty;
 import org.patryk3211.powergrid.circuits.components.properties.IntProperty;
@@ -29,7 +30,7 @@ import java.util.WeakHashMap;
  * Compact transformer using Power Grid's lumped transformer coupling and native
  * circuit-board thermal overload/destruction system.
  */
-public final class TransformerComponent extends org.patryk3211.powergrid.circuits.components.Component implements IComponentGoggleInformation {
+public final class TransformerComponent extends VerticallyOrientableComponent implements IComponentGoggleInformation {
     /** Nameplate apparent-power rating passed directly to Power Grid thermal overload. */
     private static final float THERMAL_RATING_WATTS = 120.0F;
 
@@ -44,6 +45,22 @@ public final class TransformerComponent extends org.patryk3211.powergrid.circuit
 
     private static final Map<PlacedComponent, RuntimeState> RUNTIME =
             Collections.synchronizedMap(new WeakHashMap<>());
+
+    // Exact 90-degree clockwise rotation of the 5x4 registration footprint.
+    // Terminal indices and polarity names remain stable in both orientations.
+    private static final ComponentFootprint VERTICAL_FOOTPRINT =
+            new ComponentFootprint.Builder(
+                    4, 5,
+                    "component." + MoreGrid.MOD_ID + ".transformer",
+                    null
+            )
+                    .addPad(3, 0, 0, "Primary 1", "P1")
+                    .addPad(0, 0, 1, "Primary 2", "P2")
+                    .addPad(3, 4, 2, "Secondary 1", "S1")
+                    .addPad(0, 4, 3, "Secondary 2", "S2")
+                    .withItem()
+                    .withOutline()
+                    .build();
 
     public static final IntProperty TOTAL_TURNS = new IntProperty(
             MoreGrid.MOD_ID,
@@ -76,7 +93,7 @@ public final class TransformerComponent extends org.patryk3211.powergrid.circuit
     );
 
     public TransformerComponent(ComponentFootprint footprint) {
-        super(footprint);
+        super(footprint, VERTICAL_FOOTPRINT);
     }
 
     @Override

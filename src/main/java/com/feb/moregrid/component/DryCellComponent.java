@@ -16,6 +16,7 @@ import org.patryk3211.powergrid.circuits.circuitboard.CircuitBoardBlockEntity;
 import org.patryk3211.powergrid.circuits.circuitboard.ComponentCircuitBuilder;
 import org.patryk3211.powergrid.circuits.components.IComponentGoggleInformation;
 import org.patryk3211.powergrid.circuits.components.IInteractableComponent;
+import org.patryk3211.powergrid.circuits.components.VerticallyOrientableComponent;
 import org.patryk3211.powergrid.circuits.components.properties.CalculatedProperty;
 import org.patryk3211.powergrid.circuits.components.properties.ComponentProperty;
 import org.patryk3211.powergrid.circuits.components.properties.FloatProperty;
@@ -32,7 +33,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 /** A non-rechargeable zinc-carbon dry-cell battery pack. */
-public final class DryCellComponent extends org.patryk3211.powergrid.circuits.components.Component
+public final class DryCellComponent extends VerticallyOrientableComponent
         implements IComponentGoggleInformation, IInteractableComponent {
     private static final double TICK_SECONDS = 1.0D / 20.0D;
     private static final double BATTERY_TIME_SCALE = 60.0D;
@@ -44,6 +45,19 @@ public final class DryCellComponent extends org.patryk3211.powergrid.circuits.co
      */
     private static final Map<PlacedComponent, VoltageSourceCoupling> SOURCES =
             Collections.synchronizedMap(new WeakHashMap<>());
+
+    // Exact 90-degree clockwise rotation of the 5x3 registration footprint.
+    private static final ComponentFootprint VERTICAL_FOOTPRINT =
+            new ComponentFootprint.Builder(
+                    3, 5,
+                    "component." + MoreGrid.MOD_ID + ".dry_cell",
+                    null
+            )
+                    .addPad(1, 0, 0, "Positive", "+")
+                    .addPad(1, 4, 1, "Negative", "-")
+                    .withItem()
+                    .withOutline()
+                    .build();
 
     public static final IntProperty CELL_COUNT = new IntProperty(
             MoreGrid.MOD_ID,
@@ -90,7 +104,7 @@ public final class DryCellComponent extends org.patryk3211.powergrid.circuits.co
     );
 
     public DryCellComponent(ComponentFootprint footprint) {
-        super(footprint);
+        super(footprint, VERTICAL_FOOTPRINT);
     }
 
     @Override
