@@ -7,7 +7,6 @@ import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 import org.patryk3211.powergrid.circuits.circuitboard.ComponentCircuitBuilder;
 import org.patryk3211.powergrid.circuits.components.IComponentGoggleInformation;
-import org.patryk3211.powergrid.circuits.components.VerticallyOrientableComponent;
 import org.patryk3211.powergrid.circuits.components.properties.BooleanProperty;
 import org.patryk3211.powergrid.circuits.components.properties.CalculatedProperty;
 import org.patryk3211.powergrid.circuits.components.properties.ComponentProperty;
@@ -21,22 +20,8 @@ import java.util.List;
 import java.util.Locale;
 
 /** Three-terminal, latching, unidirectional silicon-controlled rectifier. */
-public final class SCRComponent extends VerticallyOrientableComponent implements IComponentGoggleInformation {
+public final class SCRComponent extends org.patryk3211.powergrid.circuits.components.Component implements IComponentGoggleInformation {
     private static final float RATED_ANODE_CURRENT = 8.0F;
-
-    // Exact 90-degree clockwise rotation of the 4x3 registration footprint.
-    private static final ComponentFootprint VERTICAL_FOOTPRINT =
-            new ComponentFootprint.Builder(
-                    3, 4,
-                    "component." + MoreGrid.MOD_ID + ".scr",
-                    null
-            )
-                    .addPad(1, 0, 0, "Anode", "A")
-                    .addPad(1, 3, 1, "Cathode", "K")
-                    .addPad(0, 1, 2, "Gate", "G")
-                    .withItem()
-                    .withOutline()
-                    .build();
 
     public static final FloatProperty TRIGGER_CURRENT = new FloatProperty(
             MoreGrid.MOD_ID,
@@ -83,7 +68,7 @@ public final class SCRComponent extends VerticallyOrientableComponent implements
     ).hidden().cast();
 
     public SCRComponent(ComponentFootprint footprint) {
-        super(footprint, VERTICAL_FOOTPRINT);
+        super(footprint);
     }
 
     @Override
