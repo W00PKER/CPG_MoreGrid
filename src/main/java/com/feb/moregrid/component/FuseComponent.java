@@ -41,12 +41,12 @@ public final class FuseComponent extends VerticallyOrientableComponent
 
     private static final ComponentFootprint VERTICAL_FOOTPRINT =
             new ComponentFootprint.Builder(
-                    3, 5,
+                    3, 3,
                     "component." + MoreGrid.MOD_ID + ".fuse",
                     null
             )
-                    .addPad(1, 0, 0)
-                    .addPad(1, 4, 1)
+                    .addPad(2, 1, 0)
+                    .addPad(0, 1, 1)
                     .withItem()
                     .withOutline()
                     .build();

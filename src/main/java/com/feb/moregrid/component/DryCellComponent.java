@@ -46,15 +46,14 @@ public final class DryCellComponent extends VerticallyOrientableComponent
     private static final Map<PlacedComponent, VoltageSourceCoupling> SOURCES =
             Collections.synchronizedMap(new WeakHashMap<>());
 
-    // Exact 90-degree clockwise rotation of the 5x3 registration footprint.
     private static final ComponentFootprint VERTICAL_FOOTPRINT =
             new ComponentFootprint.Builder(
-                    3, 5,
+                    3, 3,
                     "component." + MoreGrid.MOD_ID + ".dry_cell",
                     null
             )
-                    .addPad(1, 0, 0, "Positive", "+")
-                    .addPad(1, 4, 1, "Negative", "-")
+                    .addPad(2, 1, 0, "Positive", "+")
+                    .addPad(0, 1, 1, "Negative", "-")
                     .withItem()
                     .withOutline()
                     .build();
