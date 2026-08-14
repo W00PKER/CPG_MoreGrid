@@ -14,7 +14,7 @@ Items appear in both a dedicated MoreGrid tab and the vanilla Redstone Blocks ta
 Place the released Power Grid JAR at:
 
 ```text
-libs/powergrid-mc1.21.1-6.0.jar
+libs/powergrid-mc1.21.1-0.6.0.jar
 ```
 
 Then open the project in IntelliJ with Java 21 and run the `client` configuration.

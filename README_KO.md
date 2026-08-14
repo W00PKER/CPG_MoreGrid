@@ -1,6 +1,6 @@
 # MoreGrid
 
-Create: Power Grid 0.5.5.1용 NeoForge 1.21.1 회로 부품 애드온입니다.
+Create: Power Grid 0.6.0용 NeoForge 1.21.1 회로 부품 애드온입니다.
 
 회로판에 설치할 수 있는 다음 네 부품을 추가합니다.
 
@@ -17,14 +17,14 @@ Create: Power Grid 0.5.5.1용 NeoForge 1.21.1 회로 부품 애드온입니다.
 - NeoForge 21.1.x
 - Java 21
 - Create 6.0.10
-- Create: Power Grid 0.5.5.1
+- Create: Power Grid 0.6.0
 
 ## 개발 환경 실행
 
 1. `libs/` 폴더에 현행 Power Grid JAR를 넣습니다.
 
    ```text
-   libs/powergrid-mc1.21.1-0.5.5.1.jar
+   libs/powergrid-mc1.21.1-0.6.0.jar
    ```
 
    파일이 없으면 Gradle이 CurseMaven 의존성을 사용합니다.
