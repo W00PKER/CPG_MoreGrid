@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0
+
+- Updated to Power Grid 6.0
+- Fixed creative tab placement
+- Fixed double rotations for all components
+- Introduced vertical rotation for the zinc-carbon dry-cell pack
+- Reworked all component models
+
 ## 1.0.0
 
 - Added rotatable circuit transformer with up to 30 total integer turns.
