@@ -1,6 +1,6 @@
 # MoreGrid
 
-A NeoForge 1.21.1 add-on for Create: Power Grid 0.5.5.1, adding four compact and rotatable circuit-board parts:
+A NeoForge 1.21.1 add-on for Create: Power Grid 0.6.0, adding four compact and rotatable circuit-board parts:
 
 - 4-terminal lumped-model transformer with an integer winding divider (up to 30 total turns)
 - One-shot I²t cartridge fuse
@@ -14,7 +14,7 @@ Items appear in both a dedicated MoreGrid tab and the vanilla Redstone Blocks ta
 Place the released Power Grid JAR at:
 
 ```text
-libs/powergrid-mc1.21.1-0.5.5.1.jar
+libs/powergrid-mc1.21.1-6.0.jar
 ```
 
 Then open the project in IntelliJ with Java 21 and run the `client` configuration.
