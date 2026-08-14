@@ -21,7 +21,7 @@ import org.patryk3211.powergrid.circuits.circuitboard.ComponentCircuitBuilder;
 import org.patryk3211.powergrid.circuits.components.IComponentGoggleInformation;
 import org.patryk3211.powergrid.circuits.components.IInteractableComponent;
 import org.patryk3211.powergrid.circuits.components.IRenderedComponent;
-import org.patryk3211.powergrid.circuits.components.VerticallyOrientableComponent;
+import org.patryk3211.powergrid.circuits.components.OrientableComponent;
 import org.patryk3211.powergrid.circuits.components.properties.BooleanProperty;
 import org.patryk3211.powergrid.circuits.components.properties.CalculatedProperty;
 import org.patryk3211.powergrid.circuits.components.properties.ComponentProperty;
@@ -35,21 +35,9 @@ import java.util.List;
 import java.util.Locale;
 
 /** A replaceable cartridge fuse with an I²t-style trip curve. */
-public final class FuseComponent extends VerticallyOrientableComponent
+public final class FuseComponent extends OrientableComponent
         implements IComponentGoggleInformation, IInteractableComponent, IRenderedComponent {
     private static final double TICK_SECONDS = 1.0D / 20.0D;
-
-    private static final ComponentFootprint VERTICAL_FOOTPRINT =
-            new ComponentFootprint.Builder(
-                    3, 3,
-                    "component." + MoreGrid.MOD_ID + ".fuse",
-                    null
-            )
-                    .addPad(2, 1, 0)
-                    .addPad(0, 1, 1)
-                    .withItem()
-                    .withOutline()
-                    .build();
 
     public static final FloatProperty RATED_CURRENT = new FloatProperty(
             MoreGrid.MOD_ID,
@@ -89,7 +77,7 @@ public final class FuseComponent extends VerticallyOrientableComponent
     ).hidden().cast();
 
     public FuseComponent(ComponentFootprint footprint) {
-        super(footprint, VERTICAL_FOOTPRINT);
+        super(footprint);
     }
 
     @Override
@@ -205,7 +193,7 @@ public final class FuseComponent extends VerticallyOrientableComponent
 
     @Override
     public VoxelShape getShape(@NotNull PlacedComponent placed) {
-        return IInteractableComponent.extrudedFootprint(placed, 2.0F / 16.0F);
+        return IInteractableComponent.extrudedFootprint(placed, 1.0F / 16.0F);
     }
 
     /**
