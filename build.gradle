@@ -61,7 +61,7 @@ dependencies {
     implementation "com.tterrag.registrate:Registrate:${registrate_version}"
 
     // Put the exact released JAR in libs/ for the most reliable development setup.
-    def localPowerGrid = file('libs/powergrid-mc1.21.1-0.5.5.1.jar')
+    def localPowerGrid = file('libs/powergrid-mc1.21.1-0.6.0.jar')
     if (localPowerGrid.exists()) {
         implementation files(localPowerGrid)
     } else {
