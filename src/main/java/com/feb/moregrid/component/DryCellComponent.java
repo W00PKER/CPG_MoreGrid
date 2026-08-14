@@ -182,7 +182,8 @@ public final class DryCellComponent extends VerticallyOrientableComponent
 
     @Override
     public VoxelShape getShape(@NotNull PlacedComponent placed) {
-        return IInteractableComponent.extrudedFootprint(placed, 1.28F / 16.0F);
+        boolean vertical = placed.footprint().getWidth()== 3 && placed.footprint().getHeight() == 3;
+        return IInteractableComponent.extrudedFootprint(placed, vertical ? 6.0F / 16.0F : 2.5F / 16.0F);
     }
 
     /** Replace the installed pack with a fresh MoreGrid dry-cell item. */
