@@ -2,11 +2,11 @@
 
 ## 1.1.0
 
-- Updated to Power Grid 6.0
+- Updated to Power Grid 0.6.0
 - Fixed creative tab placement
 - Fixed double rotations for all components
 - Introduced vertical rotation for the zinc-carbon dry-cell pack
-- Reworked all component models
+- Tweaked all component models
 
 ## 1.0.0
 
