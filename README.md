@@ -7,7 +7,7 @@ A NeoForge 1.21.1 add-on for Create: Power Grid 0.6.0, adding four compact and r
 - Latching SCR thyristor with gate trigger, holding current, forward drop and on resistance
 - Discharging, non-rechargeable zinc-carbon dry-cell pack
 
-Items appear in both a dedicated MoreGrid tab and the vanilla Redstone Blocks tab.
+Items appear in a dedicated MoreGrid tab.
 
 ## Setup
 
