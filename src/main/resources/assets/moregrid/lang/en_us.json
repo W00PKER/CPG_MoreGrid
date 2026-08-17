@@ -56,7 +56,6 @@
   "moregrid.tooltip.fuse.repair": "Right-click with a fresh cartridge fuse to repair",
   "moregrid.message.fuse.repair_required": "Hold a fresh cartridge fuse to replace the blown one",
   "moregrid.message.fuse.repaired": "Fuse cartridge replaced",
-  "moregrid.tooltip.fuse.header": "Fuse Information:",
   "moregrid.tooltip.fuse.blown": "Fuse Element: blown",
   "moregrid.tooltip.fuse.intact": "Fuse Element: intact (%s A)",
   "moregrid.tooltip.fuse.damage": "Accumulated I²t Damage: %s%%",

@@ -4,9 +4,8 @@ import com.feb.moregrid.MoreGrid;
 import com.feb.moregrid.registry.ModItems;
 import com.feb.moregrid.util.MoreGridMath;
 import com.google.common.collect.ImmutableCollection;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -24,7 +23,9 @@ import org.patryk3211.powergrid.circuits.components.properties.IntProperty;
 import org.patryk3211.powergrid.circuits.schematic.ComponentFootprint;
 import org.patryk3211.powergrid.circuits.schematic.PlacedComponent;
 import org.patryk3211.powergrid.circuits.thermal.ThermalBuilder;
+import org.patryk3211.powergrid.collections.ModdedSoundEvents;
 import org.patryk3211.powergrid.electricity.sim.node.VoltageSourceCoupling;
+import org.patryk3211.powergrid.utility.Lang;
 
 import java.util.Collections;
 import java.util.List;
@@ -74,7 +75,7 @@ public final class DryCellComponent extends VerticallyOrientableComponent
             2.0F
     );
 
-    public static final FloatProperty STATE_OF_CHARGE = (FloatProperty) new FloatProperty(
+    public static final FloatProperty STATE_OF_CHARGE = new FloatProperty(
             MoreGrid.MOD_ID,
             "dry_cell_soc",
             1.0F,
@@ -92,16 +93,6 @@ public final class DryCellComponent extends VerticallyOrientableComponent
             value -> String.format(Locale.ROOT, "%.2f V", value)
     );
 
-    public static final CalculatedProperty<Float> INTERNAL_RESISTANCE = new CalculatedProperty<>(
-            MoreGrid.MOD_ID,
-            "dry_cell_internal_resistance",
-            placed -> (float) MoreGridMath.dryCellInternalResistance(
-                    placed.get(CELL_COUNT),
-                    placed.get(STATE_OF_CHARGE)
-            ),
-            value -> String.format(Locale.ROOT, "%.3f Ω", value)
-    );
-
     public DryCellComponent(ComponentFootprint footprint) {
         super(footprint, VERTICAL_FOOTPRINT);
     }
@@ -112,7 +103,6 @@ public final class DryCellComponent extends VerticallyOrientableComponent
         properties.add(CELL_COUNT);
         properties.add(CAPACITY_AH);
         properties.add(OPEN_VOLTAGE);
-        properties.add(INTERNAL_RESISTANCE);
         properties.add(STATE_OF_CHARGE);
         properties.add(power(5.0F));
     }
@@ -127,15 +117,6 @@ public final class DryCellComponent extends VerticallyOrientableComponent
         double soc = MoreGridMath.clamp01(placed.get(STATE_OF_CHARGE));
         float resistance = (float) MoreGridMath.dryCellInternalResistance(cells, soc);
 
-        /*
-         * Use Power Grid's native voltage-source node. The previous Norton
-         * wire implemented ISolverHook but did not report isSource() == true.
-         * Power Grid skips solving and zeroes the state vector when a network's
-         * source count is zero. current() still subtracted the Norton current,
-         * so attaching a wire produced 0 V output together with phantom current,
-         * rapid discharge and I²R self-heating. VoltageSourceCoupling is a real
-         * source node and is handled by the solver's normal source path.
-         */
         VoltageSourceCoupling source = builder.addInternalNode(
                 VoltageSourceCoupling.class,
                 builder.terminalNode(0),
@@ -145,10 +126,6 @@ public final class DryCellComponent extends VerticallyOrientableComponent
         source.setVoltage((float) MoreGridMath.dryCellOpenVoltage(cells, soc));
         source.setResistance(resistance);
         SOURCES.put(placed, source);
-
-        // Battery internal loss is deliberately not registered with the board's
-        // destructive thermal system. A short circuit may drain the cell, but an
-        // open lead can no longer generate phantom I²R heat and destroy it.
     }
 
     @Override
@@ -157,9 +134,6 @@ public final class DryCellComponent extends VerticallyOrientableComponent
         if (source == null || !source.isConverged()) {
             return true;
         }
-
-        // Power Grid's VoltageSourceCoupling reports discharge as negative
-        // current (the same convention used by its built-in battery).
         double current = source.getCurrent();
         if (!Double.isFinite(current)) {
             return true;
@@ -223,14 +197,7 @@ public final class DryCellComponent extends VerticallyOrientableComponent
         be.setChanged();
 
         if (be.getLevel() != null) {
-            be.getLevel().playSound(
-                    null,
-                    be.getBlockPos(),
-                    SoundEvents.ANVIL_USE,
-                    SoundSource.BLOCKS,
-                    0.30F,
-                    1.65F
-            );
+            ModdedSoundEvents.FUSE_INSTALL.playOnServer(be.getLevel(), be.getBlockPos());
         }
         player.displayClientMessage(Component.translatable("moregrid.message.dry_cell.replaced"), true);
         return InteractionResult.SUCCESS;
@@ -253,14 +220,21 @@ public final class DryCellComponent extends VerticallyOrientableComponent
             boolean isPlayerSneaking
     ) {
         double soc = MoreGridMath.clamp01(placed.get(STATE_OF_CHARGE));
-        double voltage = MoreGridMath.dryCellOpenVoltage(placed.get(CELL_COUNT), soc);
-        tooltip.add(Component.translatable("moregrid.tooltip.dry_cell.soc", Math.round(soc * 100.0D)));
-        tooltip.add(Component.translatable(
-                "moregrid.tooltip.dry_cell.voltage",
-                String.format(Locale.ROOT, "%.2f", voltage)
-        ));
+
+        Lang.text("Battery Information:")
+                .forGoggles(tooltip);
+        Lang.text("Charge:")
+                .style(ChatFormatting.GRAY)
+                .forGoggles(tooltip, 1);
+        Lang.number(Math.round(soc * 100.0D))
+                .style(soc < 0.2D ? ChatFormatting.RED : ChatFormatting.AQUA)
+                .add(Lang.text("%"))
+                .forGoggles(tooltip, 1);
+
         if (soc < 0.999D) {
-            tooltip.add(Component.translatable("moregrid.tooltip.dry_cell.replace"));
+            Lang.text("Right-click with cell to replace")
+                    .style(ChatFormatting.YELLOW)
+                    .forGoggles(tooltip, 1);
         }
         return true;
     }
