@@ -23,6 +23,7 @@ repositories {
     maven { url = 'https://mvn.devos.one/snapshots' }
     maven { url = 'https://cursemaven.com' }
     maven { url = "https://api.modrinth.com/maven" }
+    maven { url = "https://maven.blamejared.com" } // JEI
 }
 
 neoForge {
@@ -52,6 +53,9 @@ neoForge {
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
 dependencies {
+    runtimeOnly("mezz.jei:jei-${jei_minecraft_version}-neoforge:${jei_version}")
+
+
     implementation "dev.architectury:architectury-neoforge:${architectury_api_version}"
     implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") {
         transitive = false
