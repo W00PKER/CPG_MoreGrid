@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
-  "pattern": ["CIC", "CIC",],
+  "pattern": ["CIC", "CIC"],
   "key": {
     "C": {"item": "create:copper_sheet"},
     "I": {"item": "create:iron_sheet"}
