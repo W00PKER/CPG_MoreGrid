@@ -14,19 +14,15 @@ Adds four rotatable parts for circuit boards:
 
 - **SCR thyristor** — latching switch with gate trigger, holding current, and forward drop
 
-- **Zinc-carbon dry cell** — A pack of replaceable adjustable cells in series, up to 19.2V per pack
+- **Zinc-carbon dry cell** — A pack of replaceable adjustable cells in series, up to 19.2 V per pack
 
 <img width="250" height="389" alt="Dry cell battery unit at the top" src="https://github.com/user-attachments/assets/9e389fc4-4d4c-4cd2-86d1-8071199689bb" />
 
 
-***Very WIP! Models, textures, behaviours are subject to change.***
+***Very WIP! Models, textures, behavior are subject to change.***
 
 ## Requirements
 
 - Minecraft 1.21.1 / NeoForge 21.1.x / Java 21
 - Create 6.0.10
-- Create: Power Grid 0.5.5+
-
-## Editing Setup
-
-Place the up-to-date Power Grid JAR (0.6.0.1 currently) at `libs/`
+- Create: Power Grid 0.6.0+
