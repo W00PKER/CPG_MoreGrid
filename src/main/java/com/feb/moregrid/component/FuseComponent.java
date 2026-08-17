@@ -9,8 +9,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,16 +21,16 @@ import org.patryk3211.powergrid.circuits.components.IInteractableComponent;
 import org.patryk3211.powergrid.circuits.components.IRenderedComponent;
 import org.patryk3211.powergrid.circuits.components.OrientableComponent;
 import org.patryk3211.powergrid.circuits.components.properties.BooleanProperty;
-import org.patryk3211.powergrid.circuits.components.properties.CalculatedProperty;
 import org.patryk3211.powergrid.circuits.components.properties.ComponentProperty;
 import org.patryk3211.powergrid.circuits.components.properties.FloatProperty;
 import org.patryk3211.powergrid.circuits.schematic.ComponentFootprint;
 import org.patryk3211.powergrid.circuits.schematic.PlacedComponent;
 import org.patryk3211.powergrid.circuits.thermal.ThermalBuilder;
+import org.patryk3211.powergrid.collections.ModdedSoundEvents;
 import org.patryk3211.powergrid.electricity.sim.SwitchedWire;
+import org.patryk3211.powergrid.utility.Lang;
 
 import java.util.List;
-import java.util.Locale;
 
 /** A replaceable cartridge fuse with an I²t-style trip curve. */
 public final class FuseComponent extends OrientableComponent
@@ -56,14 +54,7 @@ public final class FuseComponent extends OrientableComponent
             30.0F
     );
 
-    public static final CalculatedProperty<Float> RESISTANCE = new CalculatedProperty<>(
-            MoreGrid.MOD_ID,
-            "fuse_resistance",
-            placed -> MoreGridMath.fuseResistance(placed.get(RATED_CURRENT)),
-            value -> String.format(Locale.ROOT, "%.4f Ω", value)
-    );
-
-    public static final FloatProperty DAMAGE = (FloatProperty) new FloatProperty(
+    public static final FloatProperty DAMAGE = new FloatProperty(
             MoreGrid.MOD_ID,
             "fuse_damage",
             0.0F,
@@ -71,7 +62,7 @@ public final class FuseComponent extends OrientableComponent
             1.0F
     ).hidden().cast();
 
-    public static final BooleanProperty BLOWN = (BooleanProperty) new BooleanProperty(
+    public static final BooleanProperty BLOWN = new BooleanProperty(
             MoreGrid.MOD_ID,
             "fuse_blown"
     ).hidden().cast();
@@ -85,7 +76,6 @@ public final class FuseComponent extends OrientableComponent
         super.addProperties(properties);
         properties.add(RATED_CURRENT);
         properties.add(TRIP_TIME_2X);
-        properties.add(RESISTANCE);
         properties.add(DAMAGE);
         properties.add(BLOWN);
     }
@@ -119,7 +109,7 @@ public final class FuseComponent extends OrientableComponent
             return true;
         }
 
-        SwitchedWire wire = (SwitchedWire) placed.wires.get(0);
+        SwitchedWire wire = (SwitchedWire) placed.wires.getFirst();
         if (placed.get(BLOWN)) {
             if (wire.getState()) {
                 wire.setState(false);
@@ -236,21 +226,14 @@ public final class FuseComponent extends OrientableComponent
         be.setChanged();
 
         if (be.getLevel() != null) {
-            be.getLevel().playSound(
-                    null,
-                    be.getBlockPos(),
-                    SoundEvents.ANVIL_USE,
-                    SoundSource.BLOCKS,
-                    0.35F,
-                    1.8F
-            );
+            ModdedSoundEvents.FUSE_INSTALL.playOnServer(be.getLevel(), be.getBlockPos());
         }
         player.displayClientMessage(Component.translatable("moregrid.message.fuse.repaired"), true);
         return InteractionResult.SUCCESS;
     }
 
     private static void updateWireState(PlacedComponent placed) {
-        if (!placed.wires.isEmpty() && placed.wires.get(0) instanceof SwitchedWire wire) {
+        if (!placed.wires.isEmpty() && placed.wires.getFirst() instanceof SwitchedWire wire) {
             wire.setState(!placed.get(BLOWN));
         }
     }
@@ -261,20 +244,24 @@ public final class FuseComponent extends OrientableComponent
             @NotNull List<Component> tooltip,
             boolean isPlayerSneaking
     ) {
+        Lang.text("Fuse Information:")
+                .forGoggles(tooltip);
+
         if (placed.get(BLOWN)) {
-            tooltip.add(Component.translatable("moregrid.tooltip.fuse.blown")
-                    .withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
-            tooltip.add(Component.translatable("moregrid.tooltip.fuse.repair")
-                    .withStyle(ChatFormatting.YELLOW));
+            Lang.text("BLOWN")
+                    .style(ChatFormatting.RED)
+                    .forGoggles(tooltip, 1);
+            Lang.text("Right-click with fuse to replace")
+                    .style(ChatFormatting.YELLOW)
+                    .forGoggles(tooltip, 1);
         } else {
-            tooltip.add(Component.translatable(
-                    "moregrid.tooltip.fuse.intact",
-                    String.format(Locale.ROOT, "%.2f", placed.get(RATED_CURRENT))
-            ));
-            tooltip.add(Component.translatable(
-                    "moregrid.tooltip.fuse.damage",
-                    Math.round(placed.get(DAMAGE) * 100.0F)
-            ));
+            Lang.text("I²t Damage:")
+                    .style(ChatFormatting.GRAY)
+                    .forGoggles(tooltip, 1);
+            Lang.number(Math.round(placed.get(DAMAGE) * 100.0F))
+                    .style(ChatFormatting.AQUA)
+                    .add(Lang.text("%"))
+                    .forGoggles(tooltip, 1);
         }
         return true;
     }
