@@ -1,10 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
-  "pattern": ["CIC", "CIC", " C "],
+  "pattern": ["CIC", "CIC",],
   "key": {
-    "C": {"item": "minecraft:copper_ingot"},
-    "I": {"item": "minecraft:iron_ingot"}
+    "C": {"item": "create:copper_sheet"},
+    "I": {"item": "create:iron_sheet"}
   },
   "result": {"id": "moregrid:transformer", "count": 1}
 }
