@@ -1,8 +1,8 @@
-# MoreGrid
+# Create: Power Components
 
-A NeoForge 1.21.1 circuit-board component add-on for Create: Power Grid.
+Formerly *MoreGrid*, Create: Power Components is a NeoForge 1.21.1 circuit-board component add-on for Create: Power Grid.
 
-Adds four rotatable parts for circuit boards:
+Currently, adds four parts for circuit boards:
 
 - **Transformer** — A PCB-sized transformer with a maximum of 30 windings
 
