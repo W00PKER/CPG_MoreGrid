@@ -30,10 +30,6 @@ public final class FuseBlownRenderer {
     private static final float MARKER_Y = 1.085F / 16.0F;
     private static final int FULL_BRIGHT = 0x00F000F0;
 
-    /**
-     * A weak client-only state cache makes the smoke/pop happen once per
-     * intact -> blown transition while the persistent marker renders every frame.
-     */
     private static final Map<PlacedComponent, Boolean> LAST_STATE =
             Collections.synchronizedMap(new WeakHashMap<>());
 
