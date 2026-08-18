@@ -1,6 +1,6 @@
 # Create: Power Components
 
-Formerly *MoreGrid*, Create: Power Components is a NeoForge 1.21.1 circuit-board component add-on for Create: Power Grid.
+Formerly *MoreGrid*, **Create: Power Components** is a NeoForge 1.21.1 circuit-board component add-on for Create: Power Grid.
 
 Currently, adds four parts for circuit boards:
 
