@@ -5,10 +5,10 @@ license = "MIT"
 [[mods]]
 modId = "moregrid"
 version = "${mod_version}"
-displayName = "MoreGrid"
+displayName = "Create: Power Components"
 logoFile = "logo.png"
 description = '''
-Adds new PCB components to Create: Power Grid.
+Adds new miscellaneous PCB components to Create: Power Grid.
 '''
 
 [[dependencies.moregrid]]
