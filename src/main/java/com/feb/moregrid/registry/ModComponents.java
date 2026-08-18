@@ -53,14 +53,14 @@ public final class ModComponents {
 
     private static SCRComponent buildScr() {
         ComponentFootprint footprint = new ComponentFootprint.Builder(
-                4,
+                3,
                 3,
                 "component." + MoreGrid.MOD_ID + ".scr",
                 null
         )
-                .addPad(0, 1, 0, "Anode", "A")
-                .addPad(3, 1, 1, "Cathode", "K")
-                .addPad(1, 2, 2, "Gate", "G")
+                .addPad(0, 1, 0, "Anode", "+")
+                .addPad(2, 1, 1, "Cathode", "-")
+                .addPad(1, 0, 2, "Gate", "G")
                 .withItem()
                 .withOutline()
                 .build();
