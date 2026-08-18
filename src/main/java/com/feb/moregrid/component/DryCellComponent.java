@@ -53,8 +53,8 @@ public final class DryCellComponent extends VerticallyOrientableComponent
                     "component." + MoreGrid.MOD_ID + ".dry_cell",
                     null
             )
-                    .addPad(2, 1, 0, "Positive", "+")
-                    .addPad(0, 1, 1, "Negative", "-")
+                    .addPad(0, 1, 0, "Positive", "+")
+                    .addPad(2, 1, 1, "Negative", "-")
                     .withItem()
                     .withOutline()
                     .build();
