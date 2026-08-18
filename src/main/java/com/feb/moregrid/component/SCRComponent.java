@@ -3,7 +3,6 @@ package com.feb.moregrid.component;
 import com.feb.moregrid.MoreGrid;
 import com.feb.moregrid.sim.SCRWire;
 import com.google.common.collect.ImmutableCollection;
-import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 import org.patryk3211.powergrid.circuits.circuitboard.ComponentCircuitBuilder;
 import org.patryk3211.powergrid.circuits.components.IComponentGoggleInformation;
@@ -17,7 +16,6 @@ import org.patryk3211.powergrid.circuits.schematic.PlacedComponent;
 import org.patryk3211.powergrid.circuits.thermal.ThermalBuilder;
 import org.patryk3211.powergrid.electricity.sim.ElectricWire;
 
-import java.util.List;
 import java.util.Locale;
 
 /** Three-terminal, latching, unidirectional silicon-controlled rectifier. */
@@ -46,7 +44,8 @@ public final class SCRComponent extends OrientableComponent implements IComponen
             0.150F,
             0.010F,
             2.000F
-    );
+    ).hidden().cast();
+
 
     public static final FloatProperty FORWARD_DROP = new FloatProperty(
             MoreGrid.MOD_ID,
@@ -54,16 +53,16 @@ public final class SCRComponent extends OrientableComponent implements IComponen
             1.20F,
             0.50F,
             2.00F
-    );
+    ).hidden().cast();
 
     public static final CalculatedProperty<Float> GATE_RESISTANCE = new CalculatedProperty<>(
             MoreGrid.MOD_ID,
             "scr_gate_resistance",
             placed -> gateResistance(placed.get(TRIGGER_CURRENT)),
             value -> String.format(Locale.ROOT, "%.2f Ω", value)
-    );
+    ).hidden().cast();
 
-    public static final BooleanProperty STATE = (BooleanProperty) new BooleanProperty(
+    public static final BooleanProperty STATE = new BooleanProperty(
             MoreGrid.MOD_ID,
             "scr_state"
     ).hidden().cast();
@@ -129,35 +128,15 @@ public final class SCRComponent extends OrientableComponent implements IComponen
         if (placed.wires.isEmpty()) {
             return true;
         }
-        SCRWire wire = (SCRWire) placed.wires.get(0);
+        SCRWire wire = (SCRWire) placed.wires.getFirst();
         if (wire.wasSwitched()) {
             placed.set(STATE, wire.getState());
         }
         return true;
     }
 
-    @Override
-    public boolean addToGoggleTooltip(
-            @NotNull PlacedComponent placed,
-            @NotNull List<Component> tooltip,
-            boolean isPlayerSneaking
-    ) {
-        tooltip.add(Component.translatable(
-                placed.get(STATE) ? "moregrid.tooltip.scr.on" : "moregrid.tooltip.scr.off"
-        ));
-        tooltip.add(Component.translatable(
-                "moregrid.tooltip.scr.trigger",
-                String.format(Locale.ROOT, "%.1f mA", placed.get(TRIGGER_CURRENT) * 1000.0F)
-        ));
-        tooltip.add(Component.translatable(
-                "moregrid.tooltip.scr.drop",
-                String.format(Locale.ROOT, "%.2f V", placed.get(FORWARD_DROP))
-        ));
-        return true;
-    }
-
     private static float gateResistance(float triggerCurrent) {
         float current = Math.max(0.001F, triggerCurrent);
-        return Math.max(1.0F, Math.min(10_000.0F, 0.8F / current));
+        return Math.clamp(0.8F / current, 1.0F, 10_000.0F);
     }
 }
