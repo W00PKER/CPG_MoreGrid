@@ -19,7 +19,7 @@ Currently, adds five parts for circuit boards:
 
 <img width="250" height="389" alt="Dry cell battery unit at the top" src="https://github.com/user-attachments/assets/9e389fc4-4d4c-4cd2-86d1-8071199689bb" />
 
-- **Annunciator** — A buzzer! A small 2x2 PCB sound emitter, 6 to 24 V
+- **Signal buzzer** — A buzzer! A small 2x2 PCB sound emitter, 6 to 24 V
 
 
 ***Very WIP! Models, textures, behavior are subject to change.***

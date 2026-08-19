@@ -1,8 +1,11 @@
 # Changelog
 
+## 1.2.1
+- Buzzer sound fix on dedicated server
+
 ## 1.2.0
 - Starting to add components now!
-- Annunciator (buzzer) implemented
+- Buzzer implemented
 
 ## 1.1.1
 - Thyristor model remade and footprint downsized to 3x3

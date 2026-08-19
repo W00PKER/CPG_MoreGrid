@@ -1,7 +1,6 @@
 package com.feb.moregrid.component.buzzer;
 
 import com.feb.moregrid.MoreGrid;
-import com.feb.moregrid.registry.ModSoundEvents;
 import com.google.common.collect.ImmutableCollection;
 import org.jetbrains.annotations.NotNull;
 import org.patryk3211.powergrid.circuits.circuitboard.ComponentCircuitBuilder;
@@ -12,10 +11,6 @@ import org.patryk3211.powergrid.circuits.schematic.ComponentFootprint;
 import org.patryk3211.powergrid.circuits.schematic.PlacedComponent;
 import org.patryk3211.powergrid.circuits.thermal.ThermalBuilder;
 import org.patryk3211.powergrid.electricity.sim.ElectricWire;
-import net.minecraft.client.Minecraft;
-import java.util.Collections;
-import java.util.Map;
-import java.util.WeakHashMap;
 
 
 public final class BuzzerComponent extends OrientableComponent {
@@ -32,25 +27,10 @@ public final class BuzzerComponent extends OrientableComponent {
         super(footprint);
     }
 
-    private static final Map<PlacedComponent, Boolean> HAS_SOUND =
-            Collections.synchronizedMap(new WeakHashMap<>());
-
-
     @Override
     public boolean tick(@NotNull PlacedComponent placed) {
         if (placed.isClient()) {
-            float vol = getVolume(placed);
-            Boolean playing = HAS_SOUND.get(placed);
-            if (vol > 0 && (playing == null || !playing)) {
-                Minecraft.getInstance().getSoundManager()
-                        .play(new BuzzerSoundInstance(placed));
-                HAS_SOUND.put(placed, true);
-            }
-            if (vol > 0) {
-                LAST_PITCH.put(placed, getPitch(placed));
-            } else if (vol == 0 && playing != null && playing) {
-                HAS_SOUND.put(placed, false);
-            }
+            BuzzerClientHandler.tickSound(placed);
         }
         return true;
     }
@@ -100,6 +80,4 @@ public final class BuzzerComponent extends OrientableComponent {
         double current = Math.abs(wire.current());
         return (float) Math.clamp(0.8 + current * 0.4, 0.8, 1.4);
     }
-    private static final Map<PlacedComponent, Float> LAST_PITCH =
-            Collections.synchronizedMap(new WeakHashMap<>());
 }
