@@ -31,6 +31,7 @@
   "moregrid.component.property.dry_cell_internal_resistance": "Internal Resistance",
   "moregrid.component.property.buzzer_rated_voltage": "Rated Voltage",
   "moregrid.component.property.dip_state": "State",
+  "moregrid.component.property.dip_label": "Label",
   "component.moregrid.transformer.0": "Primary Start",
   "component.moregrid.transformer.1": "Primary End",
   "component.moregrid.transformer.2": "Secondary Start",
