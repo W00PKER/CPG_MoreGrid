@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:lever" },
+    { "item": "powergrid:pins" },
+    { "item": "powergrid:zinc_sheet" }
+  ],
+  "result": {
+    "id": "moregrid:dip",
+    "count": 1
+  }
+}

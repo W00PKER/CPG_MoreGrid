@@ -23,6 +23,8 @@ public final class ModItems {
             ITEMS.registerSimpleItem("dry_cell", new Item.Properties().stacksTo(16));
     public static final DeferredHolder<Item, Item> BUZZER =
             ITEMS.registerSimpleItem("buzzer", new Item.Properties());
+    public static final DeferredHolder<Item, Item> DIP =
+            ITEMS.registerSimpleItem("dip", new Item.Properties());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB =
             CREATIVE_TABS.register("main", () -> CreativeModeTab.builder()
@@ -34,6 +36,7 @@ public final class ModItems {
                         output.accept(SCR.get());
                         output.accept(DRY_CELL.get());
                         output.accept(BUZZER.get());
+                        output.accept(DIP.get());
                     })
                     .build());
 

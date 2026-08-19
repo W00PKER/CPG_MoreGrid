@@ -2,7 +2,7 @@
 
 Formerly *MoreGrid*, **Create: Power Components** is a NeoForge 1.21.1 circuit-board component add-on for Create: Power Grid.
 
-Currently, adds five parts for circuit boards:
+Currently, adds six parts for circuit boards:
 
 
 - **Transformer** — A PCB-sized transformer with a maximum of 30 windings
@@ -20,6 +20,8 @@ Currently, adds five parts for circuit boards:
 <img width="250" height="389" alt="Dry cell battery unit at the top" src="https://github.com/user-attachments/assets/9e389fc4-4d4c-4cd2-86d1-8071199689bb" />
 
 - **Signal buzzer** — A buzzer! A small 2x2 PCB sound emitter, 6 to 24 V
+
+- **DIP switch** — A tiny 1x2 switch, rated for only 1 A
 
 
 ***Very WIP! Models, textures, behavior are subject to change.***

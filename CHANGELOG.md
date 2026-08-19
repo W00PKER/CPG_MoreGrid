@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.2
+- Tiny "DIP" 1A switches added with 1x2 footprints
+
 ## 1.2.1
 - Buzzer sound fix on dedicated server
 

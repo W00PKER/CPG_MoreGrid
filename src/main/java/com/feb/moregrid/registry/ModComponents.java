@@ -1,10 +1,7 @@
 package com.feb.moregrid.registry;
 
 import com.feb.moregrid.MoreGrid;
-import com.feb.moregrid.component.DryCellComponent;
-import com.feb.moregrid.component.FuseComponent;
-import com.feb.moregrid.component.SCRComponent;
-import com.feb.moregrid.component.TransformerComponent;
+import com.feb.moregrid.component.*;
 import com.feb.moregrid.component.buzzer.BuzzerComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -97,6 +94,19 @@ public final class ModComponents {
                 .build();
         return new BuzzerComponent(footprint);
     }
+    private static DipComponent buildDip() {
+        ComponentFootprint footprint = new ComponentFootprint.Builder(
+                1, 2,
+                "component." + MoreGrid.MOD_ID + ".dip",
+                null
+        )
+                .addPad(0, 0, 0)
+                .addPad(0, 1, 1)
+                .withItem()
+                .withOutline()
+                .build();
+        return new DipComponent(footprint);
+    }
 
     @SubscribeEvent
     public static void onRegister(RegisterEvent event) {
@@ -108,6 +118,7 @@ public final class ModComponents {
         register(event, "scr", buildScr());
         register(event, "dry_cell", buildDryCell());
         register(event, "buzzer", buildBuzzer());
+        register(event, "dip", buildDip());
     }
 
     private static void register(RegisterEvent event, String id, org.patryk3211.powergrid.circuits.components.Component component) {

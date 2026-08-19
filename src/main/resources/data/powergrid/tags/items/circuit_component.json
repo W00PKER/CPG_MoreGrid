@@ -5,6 +5,7 @@
     "moregrid:fuse",
     "moregrid:scr",
     "moregrid:dry_cell",
-    "moregrid:buzzer"
+    "moregrid:buzzer",
+    "moregrid:dip"
   ]
 }
