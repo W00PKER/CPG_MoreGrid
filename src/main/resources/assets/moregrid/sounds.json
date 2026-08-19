@@ -1,0 +1,20 @@
+{
+  "annunciator": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "moregrid:annunciator",
+        "stream": true
+      }
+    ]
+  },
+  "annunciator_end": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "moregrid:annunciator_end",
+        "stream": true
+      }
+    ]
+  }
+}

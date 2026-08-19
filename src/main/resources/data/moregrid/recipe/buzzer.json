@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [" I ","CSC", " I "],
+  "key": {
+    "C": {"item": "powergrid:wire"},
+    "S": {"item": "create:iron_sheet"},
+    "I": {"item": "minecraft:iron_nugget"}
+  },
+  "result": {"id": "moregrid:buzzer", "count": 1}
+}

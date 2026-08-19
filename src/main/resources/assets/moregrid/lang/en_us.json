@@ -27,6 +27,7 @@
   "moregrid.component.property.dry_cell_soc": "State of Charge",
   "moregrid.component.property.dry_cell_open_voltage": "Open-Circuit Voltage",
   "moregrid.component.property.dry_cell_internal_resistance": "Internal Resistance",
+  "moregrid.component.property.buzzer_rated_voltage": "Rated Voltage",
   "component.moregrid.transformer.0": "Primary Start",
   "component.moregrid.transformer.1": "Primary End",
   "component.moregrid.transformer.2": "Secondary Start",
