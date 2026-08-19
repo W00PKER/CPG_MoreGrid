@@ -5,6 +5,7 @@ import com.feb.moregrid.component.DryCellComponent;
 import com.feb.moregrid.component.FuseComponent;
 import com.feb.moregrid.component.SCRComponent;
 import com.feb.moregrid.component.TransformerComponent;
+import com.feb.moregrid.component.buzzer.BuzzerComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -82,6 +83,21 @@ public final class ModComponents {
         return new DryCellComponent(footprint);
     }
 
+    private static BuzzerComponent buildBuzzer() {
+        ComponentFootprint footprint = new ComponentFootprint.Builder(
+                2,
+                2,
+                "component." + MoreGrid.MOD_ID + ".buzzer",
+                null
+        )
+                .addPad(0, 0, 0, "Positive", "+")
+                .addPad(1, 1, 1, "Negative", "-")
+                .withItem()
+                .withOutline()
+                .build();
+        return new BuzzerComponent(footprint);
+    }
+
     @SubscribeEvent
     public static void onRegister(RegisterEvent event) {
         if (!event.getRegistryKey().equals(ComponentRegistry.REGISTRY_KEY)) {
@@ -91,6 +107,7 @@ public final class ModComponents {
         register(event, "fuse", buildFuse());
         register(event, "scr", buildScr());
         register(event, "dry_cell", buildDryCell());
+        register(event, "buzzer", buildBuzzer());
     }
 
     private static void register(RegisterEvent event, String id, org.patryk3211.powergrid.circuits.components.Component component) {

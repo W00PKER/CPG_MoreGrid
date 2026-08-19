@@ -3,6 +3,7 @@ package com.feb.moregrid;
 import com.feb.moregrid.registry.ModItems;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
+import com.feb.moregrid.registry.ModSoundEvents;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
 
@@ -14,6 +15,7 @@ public final class MoreGrid {
     public MoreGrid(IEventBus modBus) {
         ModItems.ITEMS.register(modBus);
         ModItems.CREATIVE_TABS.register(modBus);
+        ModSoundEvents.SOUNDS.register(modBus);
     }
 
 }

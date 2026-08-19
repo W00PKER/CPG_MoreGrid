@@ -1,0 +1,23 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "moregrid:block/component/buzzer",
+		"particle": "moregrid:block/component/buzzer"
+	},
+	"elements": [
+		{
+			"name": "Body",
+			"from": [0.05, 0, 0.05],
+			"to": [1.95, 0.5, 1.95],
+			"faces": {
+				"north": {"uv": [3, 0, 6, 4], "texture": "#0"},
+				"east": {"uv": [0, 0, 3, 4], "texture": "#0"},
+				"south": {"uv": [9, 0, 12, 4], "texture": "#0"},
+				"west": {"uv": [6, 0, 9, 4], "texture": "#0"},
+				"up": {"uv": [0, 4, 3, 7], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [3, 4, 6, 7], "rotation": 90, "texture": "#0"}
+			}
+		}
+	]
+}
