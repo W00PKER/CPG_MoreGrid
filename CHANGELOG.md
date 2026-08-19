@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+- Starting to add components now!
+- Annunciator (buzzer) implemented
+
 ## 1.1.1
 - Thyristor model remade and footprint downsized to 3x3
 - Craft recipes adjusted slightly
