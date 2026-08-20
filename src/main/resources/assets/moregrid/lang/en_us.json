@@ -30,6 +30,7 @@
   "moregrid.component.property.dry_cell_open_voltage": "Open-Circuit Voltage",
   "moregrid.component.property.dry_cell_internal_resistance": "Internal Resistance",
   "moregrid.component.property.buzzer_rated_voltage": "Rated Voltage",
+  "moregrid.component.property.buzzer_frequency": "Frequency (Hz)",
   "moregrid.component.property.dip_state": "State",
   "moregrid.component.property.dip_label": "Label",
   "component.moregrid.transformer.0": "Primary Start",
