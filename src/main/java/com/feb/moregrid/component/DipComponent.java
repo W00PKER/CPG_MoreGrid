@@ -9,6 +9,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.patryk3211.powergrid.circuits.circuitboard.CircuitBoardBlockEntity;
 import org.patryk3211.powergrid.circuits.circuitboard.ComponentCircuitBuilder;
+import org.patryk3211.powergrid.circuits.components.IGoggleLabel;
 import org.patryk3211.powergrid.circuits.components.IInteractableComponent;
 import org.patryk3211.powergrid.circuits.components.OrientableComponent;
 import org.patryk3211.powergrid.circuits.components.properties.BooleanProperty;
@@ -23,7 +24,7 @@ import java.util.Collection;
 import java.util.List;
 
 public final class DipComponent extends OrientableComponent
-        implements IInteractableComponent {
+        implements IInteractableComponent, IGoggleLabel {
 
     public static final BooleanProperty STATE = new BooleanProperty(
             MoreGrid.MOD_ID, "dip_state");
@@ -36,6 +37,7 @@ public final class DipComponent extends OrientableComponent
     protected void addProperties(ImmutableCollection.Builder<ComponentProperty<?>> properties) {
         super.addProperties(properties);
         properties.add(STATE);
+        properties.add(LABEL);
         properties.add(current(1));
     }
 

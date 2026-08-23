@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.3
+- Added DIP label property
+- JEI tag fix
+
 ## 1.2.2
 - Tiny "DIP" 1A switches added with 1x2 footprints
 

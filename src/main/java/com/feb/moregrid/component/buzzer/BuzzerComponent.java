@@ -35,10 +35,19 @@ public final class BuzzerComponent extends OrientableComponent {
         return true;
     }
 
+    public static final FloatProperty FREQUENCY = new FloatProperty(
+            MoreGrid.MOD_ID,
+            "buzzer_frequency",
+            830.0F,
+            400.0F,
+            1600.0F
+    );
+
     @Override
     protected void addProperties(ImmutableCollection.Builder<ComponentProperty<?>> properties) {
         super.addProperties(properties);
         properties.add(RATED_VOLTAGE);
+        properties.add(FREQUENCY);
         properties.add(power(2.0F));
     }
 
@@ -76,8 +85,10 @@ public final class BuzzerComponent extends OrientableComponent {
 
     public static float getPitch(PlacedComponent placed) {
         if (placed.wires.isEmpty()) return 1.0F;
+        float freq = placed.get(FREQUENCY);
+        float pitchMultiplier = freq / 830.0F;
         ElectricWire wire = (ElectricWire) placed.wires.getFirst();
         double current = Math.abs(wire.current());
-        return (float) Math.clamp(0.8 + current * 0.4, 0.8, 1.4);
+        return (float) Math.clamp(pitchMultiplier * (0.9 + current * 0.1), 0.5, 2.0);
     }
 }
