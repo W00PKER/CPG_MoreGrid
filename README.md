@@ -11,7 +11,7 @@ Currently, adds six parts for circuit boards:
 
 - **Rotary Switch** — A multi-mode rotary switch with up to 7 positions with BBM and MMB modes
 
-<img width="775" height="640" alt="{2F0AFC8E-6257-459B-BCF4-6BA804DA68EA}" src="https://github.com/user-attachments/assets/497e0945-aae6-4f24-b352-afb40174f785" />
+<img width="426" height="352" alt="{2F0AFC8E-6257-459B-BCF4-6BA804DA68EA}" src="https://github.com/user-attachments/assets/1fd9a8ce-18ac-4c9c-a9fb-614a1e7127f1" />
 
 - **Cartridge fuse** — one-shot delayed I²t fuse (0.25–32 A), blows permanently and requires full replacement
 
