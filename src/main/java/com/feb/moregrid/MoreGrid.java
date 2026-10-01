@@ -1,10 +1,12 @@
 package com.feb.moregrid;
 
+import com.feb.moregrid.component.rotary.RotarySwitchClientHandler;
 import com.feb.moregrid.registry.ModItems;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import com.feb.moregrid.registry.ModSoundEvents;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
 @Mod(MoreGrid.MOD_ID)
@@ -16,6 +18,9 @@ public final class MoreGrid {
         ModItems.ITEMS.register(modBus);
         ModItems.CREATIVE_TABS.register(modBus);
         ModSoundEvents.SOUNDS.register(modBus);
+        if (FMLEnvironment.dist.isClient()) {
+            RotarySwitchClientHandler.init();
+        }
     }
 
 }

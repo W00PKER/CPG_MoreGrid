@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [" L ", " Z ", " P "],
+  "key": {
+    "L": {"item": "minecraft:lever"},
+    "Z": {"item": "powergrid:zinc_sheet"},
+    "P": {"item": "powergrid:pins"}
+  },
+  "result": {"id": "moregrid:rotary_switch", "count": 1}
+}
