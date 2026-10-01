@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.0
+- Added rotary switches
+
 ## 1.2.3
 - Added DIP label property
 - JEI tag fix
