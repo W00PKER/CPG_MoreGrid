@@ -3,12 +3,18 @@ package com.feb.moregrid.registry;
 import com.feb.moregrid.MoreGrid;
 import com.feb.moregrid.component.*;
 import com.feb.moregrid.component.buzzer.BuzzerComponent;
+import com.feb.moregrid.component.rotary.KnobDirection;
+import com.feb.moregrid.component.rotary.RotaryLayout;
+import com.feb.moregrid.component.rotary.RotarySwitchComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.patryk3211.powergrid.circuits.components.ComponentRegistry;
 import org.patryk3211.powergrid.circuits.schematic.ComponentFootprint;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 /** Registers MoreGrid components in Power Grid's custom component registry. */
 @EventBusSubscriber(modid = MoreGrid.MOD_ID)
@@ -108,6 +114,24 @@ public final class ModComponents {
         return new DipComponent(footprint);
     }
 
+    private static RotarySwitchComponent buildRotarySwitch() {
+        Map<RotaryLayout, ComponentFootprint> footprints = new EnumMap<>(RotaryLayout.class);
+        for (RotaryLayout layout : RotaryLayout.values()) {
+            ComponentFootprint.Builder builder = new ComponentFootprint.Builder(
+                    3, 3,
+                    "component." + MoreGrid.MOD_ID + ".rotary_switch",
+                    null
+            )
+                    .addPad(1, 2, RotarySwitchComponent.COMMON_PAD, "Common", "C");
+            for (int throwNumber = 1; throwNumber <= layout.throwCount(); throwNumber++) {
+                KnobDirection pad = layout.throwPad(throwNumber);
+                builder.addPad(pad.padX(), pad.padY(), throwNumber, "Position " + throwNumber, Integer.toString(throwNumber));
+            }
+            footprints.put(layout, builder.withItem().withOutline().build());
+        }
+        return new RotarySwitchComponent(footprints);
+    }
+
     @SubscribeEvent
     public static void onRegister(RegisterEvent event) {
         if (!event.getRegistryKey().equals(ComponentRegistry.REGISTRY_KEY)) {
@@ -119,6 +143,7 @@ public final class ModComponents {
         register(event, "dry_cell", buildDryCell());
         register(event, "buzzer", buildBuzzer());
         register(event, "dip", buildDip());
+        register(event, "rotary_switch", buildRotarySwitch());
     }
 
     private static void register(RegisterEvent event, String id, org.patryk3211.powergrid.circuits.components.Component component) {

@@ -9,6 +9,10 @@ Currently, adds six parts for circuit boards:
 
 <img width="519" height="483" alt="Transformer dropping from 220 to 12 at a button control panel" src="https://github.com/user-attachments/assets/d36ee266-355d-4fbd-8600-bd7c999bd684" />
 
+- **Rotary Switch** — A multi-mode rotary switch with up to 7 positions with BBM and MMB modes
+
+<img width="426" height="352" alt="{2F0AFC8E-6257-459B-BCF4-6BA804DA68EA}" src="https://github.com/user-attachments/assets/1fd9a8ce-18ac-4c9c-a9fb-614a1e7127f1" />
+
 - **Cartridge fuse** — one-shot delayed I²t fuse (0.25–32 A), blows permanently and requires full replacement
 
 <img width="401" height="374" alt="Fuse in a radar motor control panel" src="https://github.com/user-attachments/assets/116e673e-b32d-471f-95dc-b31a9416f9d6" />
